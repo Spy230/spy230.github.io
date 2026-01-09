@@ -22,7 +22,7 @@ const Header = () => {
               className="flex items-center space-x-3 hover:opacity-80 transition-opacity"
             >
               <img 
-                src="/logo.jpg" 
+                src="/images/works/samotcvet.jpg" 
                 alt="Samocvet Логотип" 
                 className="h-10 w-10 rounded-full object-cover"
               />
