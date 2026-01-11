@@ -53,41 +53,41 @@ const Certificates = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
-            Сертификаты и лицензии
+            Сертификаты автосервиса и лицензии
           </h2>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-            Наша деятельность подтверждена необходимыми документами и сертификатами
+            Автотехцентр Самоцвет - сертифицированный автосервис для ремонта и обслуживания авто в Зеленограде и Андреевке
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
           <div className="bg-red-900 bg-opacity-30 p-6 rounded-xl text-center border border-red-600">
-            <ShieldCheck className="w-12 h-12 text-red-500 mx-auto mb-4" />
+            <ShieldCheck className="w-12 h-12 text-red-500 mx-auto mb-4" aria-label="Гарантия качества ремонта авто" />
             <h3 className="text-lg font-semibold text-white mb-2">
-              Гарантия качества
+              Гарантия качества ремонта
             </h3>
             <p className="text-gray-300 text-sm">
-              Все работы выполняются с соблюдением стандартов качества
+              Все работы по ремонту и обслуживанию авто выполняются с гарантией
             </p>
           </div>
 
           <div className="bg-red-900 bg-opacity-30 p-6 rounded-xl text-center border border-red-600">
-            <Award className="w-12 h-12 text-red-500 mx-auto mb-4" />
+            <Award className="w-12 h-12 text-red-500 mx-auto mb-4" aria-label="Сертифицированный автотехцентр" />
             <h3 className="text-lg font-semibold text-white mb-2">
-              Сертифицированные мастера
+              Сертифицированный автотехцентр
             </h3>
             <p className="text-gray-300 text-sm">
-              Наши специалисты регулярно проходят обучение и аттестацию
+              Автосервис для ремонта двигателя - специалисты проходят обучение
             </p>
           </div>
 
           <div className="bg-red-900 bg-opacity-30 p-6 rounded-xl text-center border border-red-600">
-            <FileText className="w-12 h-12 text-red-500 mx-auto mb-4" />
+            <FileText className="w-12 h-12 text-red-500 mx-auto mb-4" aria-label="Официальный автосервис" />
             <h3 className="text-lg font-semibold text-white mb-2">
-              Официальная деятельность
+              Официальный автосервис
             </h3>
             <p className="text-gray-300 text-sm">
-              Работаем с полным пакетом разрешительных документов
+              Автосервис Москва - работаем с полным пакетом документов
             </p>
           </div>
         </div>
@@ -119,7 +119,7 @@ const Certificates = () => {
                 >
                   <img
                     src={cert.src}
-                    alt={cert.alt}
+                    alt={`Сертификат автосервиса ${cert.id} - автотехцентр Самоцвет, ремонт и обслуживание авто, техобслуживание автомобиля в Зеленограде`}
                     className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
                     loading="lazy"
                   />

@@ -60,10 +60,10 @@ const GallerySimple = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-            Наши работы
+            Наши работы - ремонт авто в Зеленограде
           </h2>
           <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-            Примеры выполненных работ нашими специалистами
+            Примеры выполненных работ по ремонту и обслуживанию авто, техобслуживанию автомобиля в автосервисе Зеленоград и Андреевка
           </p>
         </div>
         
@@ -97,7 +97,7 @@ const GallerySimple = () => {
                 >
                   <img
                     src={image}
-                    alt={`Работа ${index + 1}`}
+                    alt={`Ремонт и обслуживание авто ${index + 1} - автосервис Зеленоград, техобслуживание автомобиля, автотехцентр Самоцвет, ремонт авто в Зеленограде, автосервис Андреевка, где починить авто`}
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                     loading="lazy"
                   />

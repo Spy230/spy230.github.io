@@ -16,13 +16,13 @@ const Footer = () => {
             <div className="flex items-center space-x-3 mb-4">
               <img 
                 src="/spy230.github.io/images/works/samotcvet.jpg"
-                alt="Самоцвет Логотип" 
+                alt="Автосервис Самоцвет - ремонт авто в Зеленограде, техобслуживание автомобиля, автосервис Москва" 
                 className="h-10 w-10 rounded-full object-cover border-2 border-red-600 bg-white"
               />
               <h3 className="text-xl font-bold">Самоцвет</h3>
             </div>
             <p className="text-gray-400 text-sm">
-              Профессиональный автосервис с 2014 года. Качественный ремонт и обслуживание автомобилей.
+              Автосервис Зеленоград с 2014 года. Ремонт и обслуживание авто, техобслуживание автомобиля, автотехцентр. Автосервис рядом со мной - автосервис открытый сейчас.
             </p>
           </div>
 

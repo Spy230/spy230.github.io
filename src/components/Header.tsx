@@ -24,7 +24,7 @@ const Header = () => {
               <div className="relative">
                 <img 
                   src="/spy230.github.io/images/works/samotcvet.jpg"
-                  alt="Самоцвет Логотип" 
+                  alt="Автосервис Самоцвет Зеленоград - ремонт и обслуживание авто, техобслуживание автомобиля, автотехцентр" 
                   className="h-12 w-12 rounded-full object-contain bg-white border-2 border-red-600 p-1"
                 />
               </div>
