@@ -1,9 +1,23 @@
+import Header from './components/Header';
+import Hero from './components/Hero';
+import Services from './components/Services';
+import About from './components/About';
+import Gallery from './components/Gallery';
+import Reviews from './components/Reviews';
+import Contacts from './components/Contacts';
+import Footer from './components/Footer';
+
 function App() {
   return (
-    <div className="min-h-screen bg-red-500 flex items-center justify-center">
-      <h1 className="text-white text-4xl font-bold">
-        ТЕСТ - САЙТ РАБОТАЕТ!
-      </h1>
+    <div className="min-h-screen bg-gray-900">
+      <Header />
+      <Hero />
+      <Services />
+      <About />
+      <Gallery />
+      <Reviews />
+      <Contacts />
+      <Footer />
     </div>
   );
 }
