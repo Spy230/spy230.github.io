@@ -4,7 +4,11 @@ call npm run build
 
 echo 📦 Подготовка к деплою...
 cd dist
+
+REM Инициализируем git репозиторий в папке dist
 git init
+git config user.email "deploy@github.com"
+git config user.name "Deploy Bot"
 git add -A
 git commit -m "Deploy: %date% %time%"
 git branch -M main
