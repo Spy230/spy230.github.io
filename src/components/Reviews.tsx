@@ -64,8 +64,14 @@ const Reviews = () => {
     };
 
     return (
-        <section id="reviews" className="py-20 bg-gray-800">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="reviews" className="py-20 bg-gray-800 relative" style={{
+            backgroundImage: 'url(/images/works/Services%20600x800%20vol%204.png)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundBlendMode: 'overlay'
+        }}>
+            <div className="absolute inset-0 bg-gradient-to-br from-gray-800/80 via-gray-800/75 to-gray-800/80"></div>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
                 <div className="text-center mb-16">
                     <h2 className="text-4xl font-bold text-white mb-4">
                         Отзывы наших клиентов
@@ -79,7 +85,7 @@ const Reviews = () => {
                     {reviews.map((review) => (
                         <div
                             key={review.id}
-                            className="bg-gray-900 rounded-xl p-6 border border-gray-700 hover:border-red-600 transition-colors"
+                            className="bg-gray-900 rounded-xl p-6 border border-gray-700 hover:border-red-600 transition-colors bg-opacity-50"
                         >
                             <div className="flex items-start space-x-4 mb-4">
                                 <div className="w-10 h-10 bg-gray-700 rounded-full flex items-center justify-center text-xl">

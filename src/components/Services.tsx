@@ -1,8 +1,35 @@
-import { Wrench, Search, Settings, PaintBucket, Cog, ChevronDown, ChevronUp, Disc, Zap, Thermometer, Wind } from 'lucide-react';
-import { useState } from 'react';
+import { Wrench, Search, Settings, PaintBucket, Cog, ChevronDown, ChevronUp, Disc } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { getServicesBackgroundStyle } from '../utils/imageUtils';
 
 const Services = () => {
   const [showAllServices, setShowAllServices] = useState(false);
+  const [bgStyle, setBgStyle] = useState<React.CSSProperties>({});
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth <= 768;
+      setIsMobile(mobile);
+      setBgStyle(getServicesBackgroundStyle());
+    };
+    
+    // Проверяем сразу при монтировании
+    checkMobile();
+    
+    // Добавляем debounce для resize
+    let timeoutId: NodeJS.Timeout;
+    const handleResize = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(checkMobile, 150);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(timeoutId);
+    };
+  }, []);
 
   const mainServiceCategories = [
     {
@@ -298,8 +325,14 @@ const Services = () => {
   ];
 
   return (
-    <section id="services" className="py-16 sm:py-24 bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="services" className="py-16 sm:py-24 bg-gray-900 relative" style={bgStyle}>
+      {/* Темный оверлей - очень прозрачный на мобильных, фон зафиксирован */}
+      <div className={`absolute inset-0 bg-gradient-to-br ${
+        isMobile 
+          ? 'from-gray-900/10 via-gray-800/5 to-gray-900/10' 
+          : 'from-gray-900/30 via-gray-800/25 to-gray-900/30'
+      }`}></div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
             Услуги и цены
@@ -316,7 +349,7 @@ const Services = () => {
             return (
               <div
                 key={index}
-                className="bg-gray-800 rounded-xl p-6 hover:shadow-lg transition-shadow border border-gray-700 hover:border-red-500"
+                className="bg-gray-800 rounded-xl p-6 hover:shadow-lg transition-shadow border border-gray-700 hover:border-red-500 bg-opacity-60"
               >
                 <div className="flex items-center mb-4">
                   <div className="bg-red-900 p-3 rounded-lg">
@@ -363,7 +396,7 @@ const Services = () => {
 
         {/* Полный список услуг */}
         {showAllServices && (
-          <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
+          <div className="bg-gray-800 rounded-xl p-6 border border-gray-700 bg-opacity-60">
             <h3 className="text-2xl font-bold text-white mb-6 text-center">
               Полный прайс-лист услуг
             </h3>

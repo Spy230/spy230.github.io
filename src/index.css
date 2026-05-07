@@ -29,3 +29,73 @@
   position: relative !important;
   margin-top: 20px !important;
 }
+
+
+/* Адаптивность для мобильных */
+@media (max-width: 768px) {
+  #hero {
+    background-attachment: scroll !important;
+  }
+}
+
+/* Оптимизация изображений для мобильных - предотвращение размытия */
+img {
+  image-rendering: auto;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Для фоновых изображений - улучшение четкости */
+section[style*="background-image"] {
+  image-rendering: auto;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Для фоновых изображений на мобильных */
+@media (max-width: 640px) {
+  #hero, #about, #services, #certificates {
+    background-size: 100% 100% !important; /* Растягиваем на всю ширину и высоту */
+    background-position: center center !important;
+    background-attachment: scroll !important;
+    image-rendering: auto !important;
+    min-height: 100vh; /* Минимальная высота = высота экрана */
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Hero секция на мобильных - полный экран */
+  #hero {
+    min-height: 100vh;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Убираем размытие на мобильных */
+  section[style*="background-image"] {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* Фиксация фона для секции services - предотвращает "падение" при раскрытии прайса */
+#services {
+  background-attachment: fixed;
+}
+
+@media (max-width: 768px) {
+  #services {
+    background-attachment: scroll;
+  }
+}
+
+/* Для высоких DPI экранов (Retina) - используем auto для лучшего качества */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  img, section[style*="background-image"] {
+    image-rendering: auto;
+  }
+}

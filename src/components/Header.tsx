@@ -1,8 +1,18 @@
 import { Phone, Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -13,7 +23,9 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-gray-900 shadow-lg fixed top-0 left-0 right-0 z-50 border-b border-red-600">
+    <header className={`fixed top-0 left-0 right-0 z-50 border-b border-red-600 transition-all duration-300 ${
+      isScrolled ? 'bg-gray-900/95 shadow-lg' : 'bg-transparent'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
@@ -23,7 +35,7 @@ const Header = () => {
             >
               <div className="relative h-12 w-12 rounded-full bg-white border-2 border-red-600 flex items-center justify-center overflow-hidden">
                 <img
-                  src="/spy230.github.io/images/works/samotcvet.jpg"
+                  src="/images/works/samotcvet.jpg"
                   alt="Логотип Самоцвет"
                   className="h-10 w-10 object-contain"
                 />
@@ -59,16 +71,16 @@ const Header = () => {
               Сертификаты
             </button>
             <button
-              onClick={() => scrollToSection('reviews')}
-              className="text-gray-300 hover:text-red-500 transition-colors font-medium"
-            >
-              Отзывы
-            </button>
-            <button
               onClick={() => scrollToSection('about')}
               className="text-gray-300 hover:text-red-500 transition-colors font-medium"
             >
               О компании
+            </button>
+            <button
+              onClick={() => scrollToSection('reviews')}
+              className="text-gray-300 hover:text-red-500 transition-colors font-medium"
+            >
+              Отзывы
             </button>
             <button
               onClick={() => scrollToSection('contacts')}
@@ -97,7 +109,9 @@ const Header = () => {
       </div>
 
       {mobileMenuOpen && (
-        <div className="md:hidden bg-gray-800 border-t border-red-600">
+        <div className={`md:hidden border-t border-red-600 transition-all duration-300 ${
+          isScrolled ? 'bg-gray-900/95' : 'bg-black/30 backdrop-blur-md'
+        }`}>
           <nav className="px-4 py-4 space-y-3">
             <button
               onClick={() => scrollToSection('services')}
@@ -118,16 +132,16 @@ const Header = () => {
               Сертификаты
             </button>
             <button
-              onClick={() => scrollToSection('reviews')}
-              className="block w-full text-left py-2 text-gray-300 hover:text-red-500 transition-colors font-medium"
-            >
-              Отзывы
-            </button>
-            <button
               onClick={() => scrollToSection('about')}
               className="block w-full text-left py-2 text-gray-300 hover:text-red-500 transition-colors font-medium"
             >
               О компании
+            </button>
+            <button
+              onClick={() => scrollToSection('reviews')}
+              className="block w-full text-left py-2 text-gray-300 hover:text-red-500 transition-colors font-medium"
+            >
+              Отзывы
             </button>
             <button
               onClick={() => scrollToSection('contacts')}

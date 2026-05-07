@@ -16,7 +16,7 @@ const Footer = () => {
             <div className="flex items-center space-x-3 mb-4">
               <div className="h-10 w-10 rounded-full bg-white border-2 border-red-600 flex items-center justify-center overflow-hidden">
                 <img 
-                  src="/spy230.github.io/images/works/samotcvet.jpg"
+                  src="/images/works/samotcvet.jpg"
                   alt="Самоцвет Логотип" 
                   className="h-8 w-8 object-contain"
                 />

@@ -1,6 +1,35 @@
+import { useState, useEffect } from 'react';
 import { CheckCircle, Clock, Award, Users } from 'lucide-react';
+import { getHeroBackgroundStyle } from '../utils/imageUtils';
 
 const Hero = () => {
+  const [isMobile, setIsMobile] = useState(false);
+  const [bgStyle, setBgStyle] = useState<React.CSSProperties>({});
+
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth <= 768;
+      setIsMobile(mobile);
+      setBgStyle(getHeroBackgroundStyle());
+    };
+    
+    // Проверяем сразу при монтировании
+    checkMobile();
+    
+    // Добавляем debounce для resize
+    let timeoutId: NodeJS.Timeout;
+    const handleResize = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(checkMobile, 150);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(timeoutId);
+    };
+  }, []);
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -11,15 +40,45 @@ const Hero = () => {
   return (
     <section 
       id="hero" 
-      className="pt-16 bg-gradient-to-br from-gray-900 via-gray-800 to-red-900 relative"
-      style={{
-        backgroundImage: 'url(/spy230.github.io/images/works/sam_adress.png)',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundBlendMode: 'overlay'
-      }}
+      className="pt-16 pb-20 bg-gradient-to-br from-gray-900 via-gray-800 to-red-900 relative overflow-hidden"
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900/90 via-gray-800/85 to-red-900/90"></div>
+      {/* Бокс с фоновым изображением - масштабируется по размеру экрана */}
+      {isMobile && (
+        <div className="absolute inset-0 w-full h-full">
+          <img 
+            src="/images/works/samotcvet.jpg"
+            alt="Фон"
+            className="w-full h-full object-cover"
+            style={{
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              objectPosition: 'center'
+            }}
+          />
+        </div>
+      )}
+      
+      {/* Для десктопа - обычный фон */}
+      {!isMobile && (
+        <div 
+          className="absolute inset-0 w-full h-full"
+          style={{
+            backgroundImage: 'url(/images/works/Hero 1920x1080.png)',
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat',
+            backgroundAttachment: 'fixed'
+          }}
+        />
+      )}
+      
+      {/* Темный оверлей - очень прозрачный на мобильных */}
+      <div className={`absolute inset-0 bg-gradient-to-br ${
+        isMobile 
+          ? 'from-gray-900/10 via-gray-800/5 to-red-900/10' 
+          : 'from-gray-900/30 via-gray-800/25 to-red-900/30'
+      }`}></div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 relative z-10">
         <div className="text-center">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6">
@@ -46,25 +105,25 @@ const Hero = () => {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
-            <div className="bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow border border-gray-700 hover:border-red-500">
+          <div className="bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow border border-gray-700 hover:border-red-500 bg-opacity-60">
               <CheckCircle className="w-12 h-12 text-red-500 mx-auto mb-4" />
               <h3 className="text-lg font-semibold text-white mb-2">Гарантия качества</h3>
               <p className="text-gray-400">На все виды работ предоставляется гарантия</p>
             </div>
 
-            <div className="bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow border border-gray-700 hover:border-red-500">
+            <div className="bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow border border-gray-700 hover:border-red-500 bg-opacity-60">
               <Clock className="w-12 h-12 text-red-500 mx-auto mb-4" />
               <h3 className="text-lg font-semibold text-white mb-2">Быстрое обслуживание</h3>
               <p className="text-gray-400">Оперативный ремонт без задержек</p>
             </div>
 
-            <div className="bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow border border-gray-700 hover:border-red-500">
+            <div className="bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow border border-gray-700 hover:border-red-500 bg-opacity-60">
               <Award className="w-12 h-12 text-red-500 mx-auto mb-4" />
               <h3 className="text-lg font-semibold text-white mb-2">Сертифицированные мастера</h3>
               <p className="text-gray-400">Опытные специалисты с подтвержденной квалификацией</p>
             </div>
 
-            <div className="bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow border border-gray-700 hover:border-red-500">
+            <div className="bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow border border-gray-700 hover:border-red-500 bg-opacity-60">
               <Users className="w-12 h-12 text-red-500 mx-auto mb-4" />
               <h3 className="text-lg font-semibold text-white mb-2">Более 1000 клиентов</h3>
               <p className="text-gray-400">Доверяют нам обслуживание своих авто</p>

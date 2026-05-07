@@ -1,8 +1,9 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper/modules';
 import { Award, FileText, ShieldCheck, ChevronLeft, ChevronRight } from 'lucide-react';
 import Lightbox from './Lightbox';
+import { getCertificatesBackgroundStyle } from '../utils/imageUtils';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -12,9 +13,35 @@ import 'swiper/css/pagination';
 const Certificates = () => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [bgStyle, setBgStyle] = useState<React.CSSProperties>({});
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth <= 768;
+      setIsMobile(mobile);
+      setBgStyle(getCertificatesBackgroundStyle());
+    };
+    
+    // Проверяем сразу при монтировании
+    checkMobile();
+    
+    // Добавляем debounce для resize
+    let timeoutId: NodeJS.Timeout;
+    const handleResize = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(checkMobile, 150);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      clearTimeout(timeoutId);
+    };
+  }, []);
   
   // Используем правильный базовый путь для GitHub Pages
-  const basePath = '/spy230.github.io/';
+  const basePath = '/';
   const certificates = [
     { id: 1, src: `${basePath}images/works/image_2025-12-29_19-25-29.png`, alt: 'Сертификат 1' },
     { id: 2, src: `${basePath}images/works/image_2025-12-29_19-25-43.png`, alt: 'Сертификат 2' },
@@ -49,8 +76,14 @@ const Certificates = () => {
   }, [certificates.length]);
 
   return (
-    <section id="certificates" className="py-16 sm:py-24 bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="certificates" className="py-16 sm:py-24 bg-gray-900 relative" style={bgStyle}>
+      {/* Темный оверлей - очень прозрачный на мобильных */}
+      <div className={`absolute inset-0 bg-gradient-to-br ${
+        isMobile 
+          ? 'from-gray-900/10 via-gray-800/5 to-gray-900/10' 
+          : 'from-gray-900/30 via-gray-800/25 to-gray-900/30'
+      }`}></div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
             Сертификаты и лицензии
@@ -61,7 +94,7 @@ const Certificates = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-12">
-          <div className="bg-red-900 bg-opacity-30 p-6 rounded-xl text-center border border-red-600">
+          <div className="bg-red-900 bg-opacity-20 p-6 rounded-xl text-center border border-red-600">
             <ShieldCheck className="w-12 h-12 text-red-500 mx-auto mb-4" />
             <h3 className="text-lg font-semibold text-white mb-2">
               Гарантия качества
@@ -71,7 +104,7 @@ const Certificates = () => {
             </p>
           </div>
 
-          <div className="bg-red-900 bg-opacity-30 p-6 rounded-xl text-center border border-red-600">
+          <div className="bg-red-900 bg-opacity-20 p-6 rounded-xl text-center border border-red-600">
             <Award className="w-12 h-12 text-red-500 mx-auto mb-4" />
             <h3 className="text-lg font-semibold text-white mb-2">
               Сертифицированные мастера
@@ -81,7 +114,7 @@ const Certificates = () => {
             </p>
           </div>
 
-          <div className="bg-red-900 bg-opacity-30 p-6 rounded-xl text-center border border-red-600">
+          <div className="bg-red-900 bg-opacity-20 p-6 rounded-xl text-center border border-red-600">
             <FileText className="w-12 h-12 text-red-500 mx-auto mb-4" />
             <h3 className="text-lg font-semibold text-white mb-2">
               Официальная деятельность

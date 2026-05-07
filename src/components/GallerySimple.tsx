@@ -11,7 +11,7 @@ const GallerySimple = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // Используем правильный базовый путь для GitHub Pages
-  const basePath = '/spy230.github.io/';
+  const basePath = '/';
   const workImages = [
     `${basePath}images/works/attachment-0.jpeg`,
     `${basePath}images/works/attachment-1.jpeg`,
