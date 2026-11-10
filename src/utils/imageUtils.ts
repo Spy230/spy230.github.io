@@ -253,7 +253,7 @@ export const getBackgroundImageStyle = (desktopImage: string, mobileImage?: stri
 };
 
 // Функция для получения фонового изображения Hero секции
-// Использует x1465493-641690240.png для мобильных, десктопное для больших экранов
+// Использует Hero 1920x1080.png и на мобильных, и на больших экранах
 export const getHeroBackgroundStyle = (): React.CSSProperties => {
   const desktopImage = '/images/works/Hero 1920x1080.png';
   const mobileImage = '/images/works/Hero 1920x1080.png';
