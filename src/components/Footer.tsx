@@ -1,4 +1,5 @@
 import { Phone, Mail, MapPin } from 'lucide-react';
+import { company } from '../config/company';
 
 const Footer = () => {
   const scrollToSection = (id: string) => {
@@ -124,7 +125,25 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm">
+        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm space-y-2">
+          <p>
+            {company.legalName}, ИНН {company.inn}, {company.ogrnLabel} {company.ogrn}
+          </p>
+          <p className="text-gray-500">Адрес: {company.address}</p>
+          <p>
+            <a
+              href="/privacy.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white underline transition-colors"
+            >
+              Политика обработки персональных данных
+            </a>
+          </p>
+          <p className="text-gray-500 text-xs">
+            Информация на сайте, включая цены, носит справочный характер и не является
+            публичной офертой (ст. 437 ГК РФ).
+          </p>
           <p>&copy; {new Date().getFullYear()} Самоцвет. Все права защищены.</p>
         </div>
       </div>
